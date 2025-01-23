@@ -1,0 +1,27 @@
+CREATE DATABASE DigiBank_teste;
+USE DigiBank_teste;
+CREATE TABLE Pessoas (
+    PessoaID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    CPF VARCHAR(11) NOT NULL UNIQUE,
+    Senha VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Contas (
+    ContaID INT AUTO_INCREMENT PRIMARY KEY,
+    NumeroConta VARCHAR(20) NOT NULL UNIQUE,
+    Saldo DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    Agencia VARCHAR(20) NOT NULL,
+    CodigoBanco VARCHAR(5) NOT NULL,
+    PessoaID INT,
+    FOREIGN KEY (PessoaID) REFERENCES Pessoas(PessoaID)
+);
+
+CREATE TABLE Extrato (
+    ExtratoID INT AUTO_INCREMENT PRIMARY KEY,
+    ContaID INT,
+    TipoTransacao VARCHAR(20),  -- 'Deposito' ou 'Saque'
+    Valor DECIMAL(10, 2),
+    DataTransacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ContaID) REFERENCES Contas(ContaID)
+);
