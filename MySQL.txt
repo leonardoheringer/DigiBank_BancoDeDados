@@ -12,7 +12,6 @@ CREATE TABLE Contas (
     NumeroConta VARCHAR(20) NOT NULL UNIQUE,
     Saldo DECIMAL(10, 2) NOT NULL DEFAULT 0,
     Agencia VARCHAR(20) NOT NULL,
-    CodigoBanco VARCHAR(5) NOT NULL,
     PessoaID INT,
     FOREIGN KEY (PessoaID) REFERENCES Pessoas(PessoaID)
 );
